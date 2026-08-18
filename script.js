@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- Typing Animation ---
     const textElement = document.getElementById('typing-text');
-    const textToType = "Zurich Gaming Innovation";
+    const textToType = "KyivGammingHub";
     let isTyping = true;
     let charIndex = 0;
     let typeSpeed = 100;
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Zero policy violations and great communication. A reliable partner.",
         "Publishing apps was never this easy. They take full responsibility.",
         "Consistent payouts and premium games. Couldn't ask for better.",
-        "Zurich Gaming Innovation completely changed my developer journey.",
+        "KyivGammingHub completely changed my developer journey.",
         "Very professional team. They actually care about your account safety.",
         "I just sit back and watch the revenue grow. Brilliant service."
     ];
@@ -126,6 +126,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // Duplicate content once to create seamless infinite scrolling effect
     if(marqueeContainer) {
         marqueeContainer.innerHTML = marqueeContent + marqueeContent;
+    }
+
+    // --- Google Play / gamepad assembly on scroll ---
+    const assembleElements = document.querySelectorAll('.scroll-assemble');
+    if ('IntersectionObserver' in window) {
+        const assemblyObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-assembled');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.35 });
+        assembleElements.forEach(element => assemblyObserver.observe(element));
+    } else {
+        assembleElements.forEach(element => element.classList.add('is-assembled'));
     }
 
     // --- FAQ Accordion Logic ---
